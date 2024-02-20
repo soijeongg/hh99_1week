@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
-import Product from "../schemas/index.js";
-//import { db } from "../schemas/index.js";
+import Product from "../schemas/products.schema.js";
+import { db } from "../schemas/index.js";
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 
