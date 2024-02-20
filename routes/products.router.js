@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import Product from "../schemas/index.js";
-import { db } from "../schemas/index.js";
+//import { db } from "../schemas/index.js";
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 
@@ -35,13 +35,12 @@ const getNextSequenceValue = async (sequenceName) => {
 //상품 작성
 router.post("/", (req, res) => {
   const { productName, content, author, password } = req.body;
- 
+
   const newProduct = new Product({
     productName,
     content,
     author,
-    password
-    
+    password,
   });
 
   newProduct
@@ -56,7 +55,6 @@ router.post("/", (req, res) => {
       res.status(500).json({ error: "Internal server error" }); // 500 에러를 클라이언트에 반환
     });
 });
-
 
 //상품상세조회
 router.get("/:id", async (req, res) => {
@@ -73,7 +71,6 @@ router.get("/:id", async (req, res) => {
   res.send(product);
 });
 
-
 //상품수정 api
 router.patch("/:id", async (req, res) => {
   let { id } = req.params;
@@ -89,9 +86,9 @@ router.patch("/:id", async (req, res) => {
   }
   product.productName = productName;
   product.content = content;
-  if (product.status !== "FOR_SALE" || product.status !== "SOLD_OUT") {
-    product.status = "FOR_SALE";
-  };
+  if (status == "FOR_SALE" || status == "SOLD_OUT") {
+    product.status = status;
+  }
   product.save();
   res.send({ message: "수정완료" });
 });
@@ -105,16 +102,15 @@ router.delete("/:id", async (req, res) => {
     // 상품이 없는 경우 -> 위와 같음
     return res.status(404).json({ message: "상품 조회에 실패했습니다." });
   }
- if (product.password !== password) {
-   console.log(product.password);
-   return res.status(403).json({ message: "비밀번호가 일치하지 않습니다." });
- }
+  if (product.password !== password) {
+    console.log(product.password);
+    return res.status(403).json({ message: "비밀번호가 일치하지 않습니다." });
+  }
   const deletedProduct = await Product.deleteOne({ _id: id });
   if (deletedProduct.deletedCount === 0) {
     return res.status(404).json({ message: "상품 삭제에 실패했습니다." });
   }
-  res.send({message: "상품이 성공적으로 삭제 되었습니다"})
+  res.send({ message: "상품이 성공적으로 삭제 되었습니다" });
 });
-
 
 export default router;
