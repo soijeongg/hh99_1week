@@ -4,7 +4,7 @@ const PORT = 3000; //포트번호를 3000으로 설정
 
 import goodsRouter from "./routes/products.router.js"; //라우터를 이 이름으로 가져오겠다
 
-app.use("/api/products", [goodsRouter]); //이 라우터를 쓰겠다
+app.use("/api/products", goodsRouter); //이 라우터를 쓰겠다
 
 app.get("/", (req, res) => {
   res.send("<h1>장터페이지 입나다</h1>");

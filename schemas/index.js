@@ -14,5 +14,3 @@ db.once("open", function () {
 });
 
 export { db }; //밖에서 쓸수있게 내보내기 
-
-
