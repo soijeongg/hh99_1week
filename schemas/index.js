@@ -13,4 +13,6 @@ db.once("open", function () {
   console.log("MongoDB에 연결되었습니다.");
 });
 
-export { db }; //밖에서 쓸수있게 내보내기
+export { db }; //밖에서 쓸수있게 내보내기 
+
+
