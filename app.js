@@ -12,6 +12,6 @@ app.get("/", (req, res) => {
 //그냥 만들어본 첫 페이지
 
 app.listen(PORT, () => {
-  console.log(PORT, "포트로 서버가 열렸어요!");
+  console.log(PORT, "포트가 열렸습니다~");
 });
 //포트 열고 콜백으로 연거 확인하기

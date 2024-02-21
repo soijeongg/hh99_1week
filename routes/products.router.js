@@ -48,7 +48,7 @@ router.post("/", (req, res) => {
   newProduct
     .save() // 저장
     .then((data) => {
-      console.log("Saved!");
+      console.log("저장완료!");
       res.send(data); // 저장된 데이터를 send해서 반환 -> 저장확인 위해
     }) // 오류시
     .catch((err) => {
@@ -93,7 +93,7 @@ router.patch("/:id", async (req, res) => {
   } //만약 상태(바디에서 받아온 상태가 FOR_SALE,SOLD_OUT 이 둘중 하나라면 바꾸기 (이 둘만으로 제한이라)
   //처음 입력시 기본값으로 들어가게 되어 있음
   product.save(); //저장
-  res.send({ message: "수정완료" }); //반환
+  res.send({ message: "수정완료!" }); //반환
 });
 
 //상품삭제 api
@@ -115,7 +115,7 @@ router.delete("/:id", async (req, res) => {
     //deletedProduct.deletedCount 몽고디비에서 삭제된 문서의 수를 나타냄
     return res.status(404).json({ message: "상품 삭제에 실패했습니다." }); //한개도 안되서 안됐다고 리턴
   } //if문 안빠지고 밖에 있다 -> 삭제된게 0 초과 -> 삭제 성공
-  res.send({ message: "상품이 성공적으로 삭제 되었습니다" });
+  res.send({ message: "삭제완료!" });
 });
 //이 라우터를 내보낸다
 export default router;
