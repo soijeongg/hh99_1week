@@ -1,16 +1,26 @@
-//몽고디비와 연결하는 부분 빼놓기
+//몽구스와 연결이 들어갈 곳
 import mongoose from "mongoose";
-//몽고디비와 커넥트 {데이터베이스 이름: node_lv1}
-mongoose.connect(
-  "mongodb+srv://010127js:ninosoi2001!@cluster0.kwny3d1.mongodb.net/?retryWrites=true&w=majority",
-  { dbName: "node_lv1" }
-);
-var db = mongoose.connection;
-//db라는 이름으로 커넥션을 하겠다
-// 연결된지 확인
-db.on("error", console.error.bind(console, "MongoDB 연결 오류:"));
-db.once("open", function () {
-  console.log("MongoDB 연결완료.");
+//환경변수 불러오기
+import dotenv from "dotenv";
+dotenv.config();
+const { MONGODB_URL } = process.env;
+
+const connect = () => {
+  // mongoose.connect는 MongoDB 서버에 연결하는 메서드입니다.
+  mongoose
+    .connect(
+      // 빨간색으로 표시된 부분은 대여한 ID, Password, 주소에 맞게끔 수정해주세요!
+      MONGODB_URL,
+      {
+        dbName: "node_lv1", // node_lv1 데이터베이스명을 사용합니다.
+      }
+    )
+    .then(() => console.log("MongoDB 연결에 성공하였습니다."))
+    .catch((err) => console.log(`MongoDB 연결에 실패하였습니다. ${err}`));
+};
+
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB 연결 에러", err);
 });
 
-export { db }; //밖에서 쓸수있게 내보내기 
+export default connect;

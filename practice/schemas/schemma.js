@@ -15,5 +15,6 @@ const bookschema = mongoose.Schema({
   date: { type: Date, default: new Date(Date.now()) },
 });
 //객체 컴파일
-let book = mongoose.model('data', bookschema)
+let book = mongoose.model('data', bookschema) //모델 만드는데 북스키마라는 객체를 data라는 컨벤션
+//근데 몽고디비는 복수형으로 만드니까 datas라고 저장될것
 export default book
