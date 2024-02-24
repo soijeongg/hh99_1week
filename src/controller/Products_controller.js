@@ -8,6 +8,8 @@ import {
   deleteProdct,
 } from "../Services/ProdctService.js";
 
+//dto를 가져온다 dto 데이터를 전송하기 위한 객체
+import ProductDTO from "../dtos/productDTO.js";
 
 
 // 전부 찾는 함수
@@ -23,7 +25,9 @@ export const getAllProductsController = async (req, res, next) => {
 //생성하는 함수
 export const createProductController = async(req, res, next)=> {
     try {
-      const productList = await createProduct(req, res, next);
+    const { ProductName, content, author, password } = req.body;
+    const productDTO = new ProductDTO(ProductName, content, author, password);
+      const productList = await createProduct(productDTO);
       res.send(productList);
     
     } catch (error) {
@@ -43,8 +47,17 @@ next(error)
 //물건을 업데이트 하는 함수
 export const update_productController = async(req, res, next)=> {
     try {
-     let update_prodctlist = await update_product(req, res, next);
-     res.send(update_prodctlist)
+      let { id } = req.params; //파람에서 가져옴
+      const { ProductName, content, status, password, author } = req.body; //바디에서 가져옴
+      const productDTO = new ProductDTO(
+        ProductName,
+        content,
+        author,
+        password,
+        status
+      );
+      let update_prodctlist = await update_product(productDTO, id);
+      res.send(update_prodctlist);
     } catch (error) {
       next(error);
     }
@@ -53,7 +66,16 @@ export const update_productController = async(req, res, next)=> {
 //물건을 지우는 함수
   export const deleteProdctController  = async(req, res, next)=> {
    try{
-    let deleletone = await deleteProdct(req, res, next)
+    let { id } = req.params;
+    const { password } = req.body;
+   const productDTO = new ProductDTO(
+     undefined,
+     undefined,
+     undefined,
+     password,
+     undefined
+   );
+    let deleletone = await deleteProdct(productDTO, id);
     res.send(deleletone)
    }catch(error){
     next(error)

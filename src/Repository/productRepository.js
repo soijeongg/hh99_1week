@@ -1,6 +1,6 @@
-
 //find, save, delete   
 import product from '../models/products.schema.js'
+
 
 //전부조회하는 함수 
 export const getalluesers  =  async() =>{
@@ -17,10 +17,10 @@ export const getuserOne = async(id)=>{
       .select("ProductName content author status createdAt");
 }
  //아이디 까지 비밀번호까지 조회
- export const updeUser = async (id) => {
-   return await product
-     .findById(id)
-     
+export const updeUser = async (id) => {
+  return await product
+    .findById(id)
+    
  };
 //저장하는 함수 
 export const postSaveUser = async(data) =>{

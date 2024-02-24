@@ -20,6 +20,6 @@ app.get("/", (req, res) => {
 //그냥 만들어본 첫 페이지
 
 app.listen(port, () => {
-  console.log(port, "포트가 열렸습니다~");
+  //console.log(port, "포트가 열렸습니다~");
 });
 //포트 열고 콜백으로 연거 확인하기
