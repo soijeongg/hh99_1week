@@ -16,7 +16,7 @@ import ProductDTO from "../dtos/productDTO.js";
 export const getAllProductsController = async (req, res, next) => {
   try {
     const productList = await getallProduct(req, res, next); // 상품 목록 조회
-    res.status(200).send(productList); // 클라이언트에게 응답 반환
+    return res.status(200).send(productList); // 클라이언트에게 응답 반환
   } catch (error) {
     next(error); // 에러 발생 시 다음 미들웨어에 전달
   }
@@ -28,7 +28,7 @@ export const createProductController = async(req, res, next)=> {
     const { ProductName, content, author, password } = req.body;
     const productDTO = new ProductDTO(ProductName, content, author, password);
       const productList = await createProduct(productDTO);
-      res.send(productList);
+     return res.send(productList);
     
     } catch (error) {
       next(error); // 오류
@@ -39,7 +39,7 @@ export const createProductController = async(req, res, next)=> {
 export const getid_productController = async(req, res, next)=> {
  try{
   let product = await getid_product(req, res, next); ;
-  res.send(product)
+  return res.send(product)
 }catch(error){
 next(error)
 }
@@ -57,7 +57,7 @@ export const update_productController = async(req, res, next)=> {
         status
       );
       let update_prodctlist = await update_product(productDTO, id);
-      res.send(update_prodctlist);
+      return res.send(update_prodctlist);
     } catch (error) {
       next(error);
     }
@@ -76,7 +76,7 @@ export const update_productController = async(req, res, next)=> {
      undefined
    );
     let deleletone = await deleteProdct(productDTO, id);
-    res.send(deleletone)
+    return res.send(deleletone)
    }catch(error){
     next(error)
    }
