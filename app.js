@@ -3,7 +3,8 @@ const app = express(); //익스프레스 객체를 만든다
 import connect from "./schemas/index.js";
 import dotenv from "dotenv"; //환경변수를 가져오겠다
 import errorHandlerware from "./middlewares/error-handlerware.js";//에러처리미들웨어
-import goodsRouter from "./routes/products.router.js"; //라우터를 이 이름으로 가져오겠다
+import goodsRouter from "./src/routes/products.router.js"; //라우터를 이 이름으로 가져오겠다
+
 
 dotenv.config();
 const { PORT } = process.env;//포트를 가져온다

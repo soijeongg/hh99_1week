@@ -1,14 +1,19 @@
 import express from "express";
 const router = express.Router(); //익스프레스 라우터 
-import Product from "../models/products.schema.js";//스키마로 만든 모델을 가져오겠다
-import { body, check, validationResult } from "express-validator";// 유효성 검사
-import {getallProduct,createProduct,getid_product,update_product,deleteProdct} from "../controller/Products_controller.js"
-
+;//스키마로 만든 모델을 가져오겠다
+import { body} from "express-validator";// 유효성 검사
+import {
+  getAllProductsController,
+  getid_productController,
+  createProductController,
+  update_productController,
+  deleteProdctController,
+} from "../controller/Products_controller.js";
 router.use(express.json());
 router.use(express.urlencoded({ extended: false })); //바디에서 가져오겟다 
 
 //상품목록조회
-router.get("/", getallProduct);
+router.get("/", getAllProductsController);
 
 //상품 작성-> 등록이라 포스트
 router.post(
@@ -33,12 +38,12 @@ router.post(
       .isLength({ min: 2 })
       .withMessage("비밀번호는 최소 2자 이상이어야 합니다."),
   ],
-  createProduct
+  createProductController
 );
 
 
 //상품상세조회 이 아이디는 가변값 어떤값이 오든지 id로 변함
-router.get("/:id",getid_product);
+router.get("/:id", getid_productController);
 
 //상품수정 api 수정이라 patch put과 다른 이유는 put은 필드가 전부 있어야 함
 router.put(
@@ -63,10 +68,10 @@ router.put(
       .isLength({ min: 2 })
       .withMessage("비밀번호는 최소 2자 이상이어야 합니다."),
   ],
- update_product
+  update_productController
 );
 
 //상품삭제 api
-router.delete("/:id",deleteProdct);
+router.delete("/:id", deleteProdctController);
 //이 라우터를 내보낸다
 export default router;
