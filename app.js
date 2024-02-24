@@ -14,6 +14,9 @@ connect()//연결
 app.use("/api/products", goodsRouter); //이 라우터를 쓰겠다
 app.use(errorHandlerware); //에러처리 미들웨어
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: false })); //바디에서 가져오겟다 
+
 app.get("/", (req, res) => {
   res.send("<h1>장터페이지 입나다</h1>");
 });

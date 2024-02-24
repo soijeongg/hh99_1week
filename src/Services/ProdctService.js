@@ -9,7 +9,7 @@ import {
 } from "../Repository/productRepository.js";
 
 // 전부 찾는 함수
-export const getallProduct = async (req, res, next) => {
+export const getallProduct = async () => {
 try {
     // 상품 목록을 조회하고 작성 날짜를 기준으로 내림차순으로 정렬
     const productList = await  getalluesers()

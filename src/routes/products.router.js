@@ -9,8 +9,7 @@ import {
   update_productController,
   deleteProdctController,
 } from "../controller/Products_controller.js";
-router.use(express.json());
-router.use(express.urlencoded({ extended: false })); //바디에서 가져오겟다 
+
 
 //상품목록조회
 router.get("/", getAllProductsController);
